@@ -1,25 +1,29 @@
 Purpose of this project
 
-1. For learn Java.
-1. For studying [Fullstack roadmap](https://github.com/jihyeonjeong11/FullStack-Roadmap) step by step.
-1. For understanding of legacy backend codebase, written in Java.
+1. To learn Java.
+2. To learn from roadmap.sh step by step.
+
+[Fullstack roadmap](https://github.com/jihyeonjeong11/FullStack-Roadmap)
+[Backend roadmap](https://roadmap.sh/backend)
+[Spring Boot roadmap](https://roadmap.sh/spring-boot)
 
 ## 1. Spring Boot Framework understandings
 
 [Roadmap](https://roadmap.sh/spring-boot)
+[Spring tutorials](https://spring.io/guides/gs/spring-boot)
 
-### 1. Architecture: gradle(maven)
+### 2. Architecture: gradle(maven)
 
 - gradlew: runtime
 - build.gradle(pom.xml): package.json
 - src/main/java/com/path/projectName: Where actual java codes lie.
 
-### gradlew commands
+### 3. gradlew commands
 
 - ./gradlew bootRun: This fires tomcat web server to boot localhost
 - ./gradlew test:
 
-### Glossary
+### 4. Glossary
 
 - All terms I wrote comparing with django python... cs I know django.
 
