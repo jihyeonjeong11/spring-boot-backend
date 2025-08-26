@@ -3,8 +3,13 @@ Purpose of this project
 1. To learn Java.
 2. To learn from roadmap.sh step by step.
 
+Learning milestones
+
+- To understand legacy backend(spring + mybatis), completing backend roadmap
+- Expand things, getting newer.
+
 [Fullstack roadmap](https://github.com/jihyeonjeong11/FullStack-Roadmap)
-[Backend roadmap](https://roadmap.sh/backend)
+[Backend roadmap](https://roadmap.sh/backend) - current mysql.
 [Spring Boot roadmap](https://roadmap.sh/spring-boot)
 
 ## 1. Spring Boot Framework understandings
