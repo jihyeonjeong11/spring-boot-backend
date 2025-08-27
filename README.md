@@ -7,6 +7,7 @@ Learning milestones
 
 - To understand legacy backend(spring + mybatis), completing backend roadmap
 - Expand things, getting newer.
+- https://gitlab.com/cloud-devops-assignments/spring-boot-react-example // add frontend before go further!
 
 [Fullstack roadmap](https://github.com/jihyeonjeong11/FullStack-Roadmap)
 [Backend roadmap](https://roadmap.sh/backend) - current mysql.
