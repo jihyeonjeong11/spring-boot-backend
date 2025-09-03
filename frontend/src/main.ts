@@ -23,33 +23,93 @@
 
 // setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
 
-import van from "vanjs-core";
+// import van from "vanjs-core";
 
-const { button, div, pre } = van.tags;
+// const { button, div, form, input, p } = van.tags;
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+// const nameState = van.state("");
+// const emailState = van.state("");
+// const messageState = van.state("");
 
-const Run = ({ sleepMs }: { sleepMs: number }) => {
-  const steps = van.state(0);
-  (async () => {
-    for (; steps.val < 40; ++steps.val) await sleep(sleepMs);
-  })();
-  return pre(
-    () =>
-      `${" ".repeat(40 - steps.val)}🚐💨Hello VanJS!${"_".repeat(steps.val)}`
-  );
-};
+// const App = () => {
+//   const handleSubmit = (e: FormDataEvent) => {
+//     e.preventDefault();
+//     messageState.val = `안녕하세요, ${nameState.val}님!`;
+//   };
 
-const Hello = () => {
-  const dom = div();
-  return div(
-    dom,
-    button({ onclick: () => van.add(dom, Run({ sleepMs: 2000 })) }, "Hello 🐌"),
-    button({ onclick: () => van.add(dom, Run({ sleepMs: 500 })) }, "Hello 🐢"),
-    button({ onclick: () => van.add(dom, Run({ sleepMs: 100 })) }, "Hello 🚶‍♂️"),
-    button({ onclick: () => van.add(dom, Run({ sleepMs: 10 })) }, "Hello 🏎️"),
-    button({ onclick: () => van.add(dom, Run({ sleepMs: 2 })) }, "Hello 🚀")
-  );
-};
+//   return div(
+//     form(
+//       { onsubmit: handleSubmit },
+//       p("이름을 입력해주세요:"),
+//       input({
+//         type: "text",
+//         oninput: (e) => (nameState.val = e.target.value),
+//         placeholder: "여기에 이름을 입력하세요",
+//       }),
+//       p("이메일을 입력해주세요:"),
+//       input({
+//         type: "text",
+//         oninput: (e) => (emailState.val = e.target.value),
+//         placeholder: "여기에 이메일을 입력하세요",
+//       }),
+//       button({ type: "submit" }, "제출")
+//     ),
+//     p(messageState)
+//   );
+// };
 
-van.add(document.body, Hello());
+// //van.add(document.body, App());
+
+const ENDPOINT_JAVA_MYBATIS = "http://localhost:8080/";
+
+const form = document.getElementById("form-join") as HTMLFormElement;
+const username = document.getElementById("username") as HTMLInputElement;
+const email = document.getElementById("email") as HTMLInputElement;
+const userListUl = document.getElementById("user-list-ul") as HTMLUListElement;
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const usersRes = await fetch(ENDPOINT_JAVA_MYBATIS + "users");
+  const users = await usersRes.json();
+
+  userListUl.innerHTML = "";
+
+  users.forEach((user) => {
+    const li = document.createElement("li");
+    li.textContent = `name: ${user.name}, email: ${user.email}`;
+    userListUl.appendChild(li);
+  });
+});
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  try {
+    const data = { name: username.value, email: email.value };
+    console.log("hello", e);
+    const res = await fetch(ENDPOINT_JAVA_MYBATIS + "users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      const usersRes = await fetch(ENDPOINT_JAVA_MYBATIS + "users");
+      const users = await usersRes.json();
+
+      userListUl.innerHTML = "";
+
+      users.forEach((user) => {
+        const li = document.createElement("li");
+        li.textContent = `이름: ${user.name}, 이메일: ${user.email}`;
+        userListUl.appendChild(li);
+      });
+
+      username.value = "";
+      email.value = "";
+    } else {
+      console.error("failed", res.status);
+    }
+  } catch (e) {
+    console.error(e);
+  }
+});
