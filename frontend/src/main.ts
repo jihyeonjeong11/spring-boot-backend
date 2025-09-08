@@ -60,24 +60,81 @@
 
 // //van.add(document.body, App());
 
+import { gql } from "@apollo/client";
+
+const GET_USERS = gql`
+  query GetUsers {
+    users {
+      id
+      name
+      email
+    }
+  }
+`;
+
 const ENDPOINT_JAVA_MYBATIS = "http://localhost:8080/";
+const ENDPOINT_JAVA_GRAPHQL = "http://localhost:8080/graphql";
 
 const form = document.getElementById("form-join") as HTMLFormElement;
 const username = document.getElementById("username") as HTMLInputElement;
 const email = document.getElementById("email") as HTMLInputElement;
 const userListUl = document.getElementById("user-list-ul") as HTMLUListElement;
 
+const bookListUl = document.getElementById("book-list-ul") as HTMLUListElement;
+
 document.addEventListener("DOMContentLoaded", async () => {
-  const usersRes = await fetch(ENDPOINT_JAVA_MYBATIS + "users");
-  const users = await usersRes.json();
+  // const usersRes = await fetch(ENDPOINT_JAVA_MYBATIS + "users");
+  // const users = await usersRes.json();
 
-  userListUl.innerHTML = "";
+  // userListUl.innerHTML = "";
 
-  users.forEach((user) => {
-    const li = document.createElement("li");
-    li.textContent = `name: ${user.name}, email: ${user.email}`;
-    userListUl.appendChild(li);
-  });
+  // users.forEach((user) => {
+  //   const li = document.createElement("li");
+  //   li.textContent = `name: ${user.name}, email: ${user.email}`;
+  //   userListUl.appendChild(li);
+  // });
+
+  const query = `
+        query {
+          allBooks {
+            id
+            name
+            pageCount
+          }
+        }
+      `;
+
+  try {
+    const response = await fetch(ENDPOINT_JAVA_GRAPHQL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query: query }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    const books = result.data.allBooks;
+
+    bookListUl.innerHTML = ""; // 기존 목록 비우기
+
+    if (books && books.length > 0) {
+      books.forEach((book) => {
+        const li = document.createElement("li");
+        li.textContent = `제목: ${book.name}, 페이지 수: ${book.pageCount}`;
+        bookListUl.appendChild(li);
+      });
+    } else {
+      bookListUl.innerHTML = `<li>책 정보가 없습니다.</li>`;
+    }
+  } catch (error) {
+    console.error("GraphQL 호출 중 오류 발생:", error);
+    bookListUl.innerHTML = `<li>책 정보를 불러오는데 실패했습니다. 오류: ${error.message}</li>`;
+  }
 });
 
 form.addEventListener("submit", async (e) => {
