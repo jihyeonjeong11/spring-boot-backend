@@ -2,13 +2,14 @@ package com.example.graphqlserver;
 
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import java.util.List;
+import java.util.UUID;
+
 
 @Controller
-@CrossOrigin(origins = "http://localhost:5173")
 public class BookController {
     @QueryMapping
     public Book bookById(@Argument String id) {
@@ -23,5 +24,19 @@ public class BookController {
     @QueryMapping
     public List<Book> findAllBooks() {
         return Book.books;
+    }
+
+
+    @MutationMapping
+    public Book addBook(@Argument String name, @Argument int pageCount, @Argument String authorId) {
+        Author author = Author.getById(authorId); 
+        if (author == null) {
+            throw new RuntimeException("Author not found");
+        }
+        
+        Book newBook = new Book(UUID.randomUUID().toString(), name, pageCount, authorId);
+        Book.books.add(newBook); 
+        
+        return newBook;
     }
 }

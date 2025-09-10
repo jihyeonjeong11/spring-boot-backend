@@ -3,6 +3,10 @@ type Query {
   findAllBooks: [Book]
 }
 
+type {
+  addBook(name: String!, pageCount: Int!, authorId: ID!): Book!
+}
+
 type Book {
   id: ID
   name: String
