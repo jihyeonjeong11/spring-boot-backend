@@ -95,13 +95,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   // });
 
   const query = `
-        query {
-          allBooks {
-            id
-            name
-            pageCount
+      query AllBooks {
+        findAllBooks {
+          id
+          name
+          pageCount
+          author {
+          firstName
+          lastName
           }
+
         }
+      }
       `;
 
   try {
@@ -116,10 +121,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-
     const result = await response.json();
-    const books = result.data.allBooks;
-
+    const books = result.data.findAllBooks;
     bookListUl.innerHTML = ""; // 기존 목록 비우기
 
     if (books && books.length > 0) {
