@@ -81,6 +81,9 @@ const email = document.getElementById("email") as HTMLInputElement;
 const userListUl = document.getElementById("user-list-ul") as HTMLUListElement;
 
 const bookListUl = document.getElementById("book-list-ul") as HTMLUListElement;
+const addBookButton = document.getElementById(
+  "add-book-button"
+) as HTMLButtonElement;
 
 document.addEventListener("DOMContentLoaded", async () => {
   // const usersRes = await fetch(ENDPOINT_JAVA_MYBATIS + "users");
@@ -108,6 +111,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       }
       `;
+  const addQuery = `
+    mutation AddNewBook {
+      addBook(title: "GraphQL in Action", authorId: "101") {
+      id
+      title
+      author {
+        firstName
+        lastName
+      }
+    }
+  }
+  `;
+
+  addBookButton.addEventListener("click", () => {
+    console.log("hello");
+  });
 
   try {
     const response = await fetch(ENDPOINT_JAVA_GRAPHQL, {
