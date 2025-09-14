@@ -1,10 +1,12 @@
 0914
 
+next todo - add auth
+
 Let's build multiplayer coding game.
 
 1. determine frontend
 2. determine database
-3. determine backend
+3. determine backend - stick to spring with java. use Kotling with Ktor!
 4. determine WSS
 
 ex)nextjs for frontend & backend, spring for WSS, Postgres for database...
