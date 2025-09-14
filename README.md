@@ -1,3 +1,14 @@
+0914
+
+Let's build multiplayer coding game.
+
+1. determine frontend
+2. determine database
+3. determine backend
+4. determine WSS
+
+ex)nextjs for frontend & backend, spring for WSS, Postgres for database...
+
 Purpose of this project
 
 1. To learn Java.
