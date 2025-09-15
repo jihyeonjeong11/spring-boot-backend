@@ -3,7 +3,7 @@ type Query {
   findAllBooks: [Book]
 }
 
-type {
+type Mutation {
   addBook(name: String!, pageCount: Int!, authorId: ID!): Book!
 }
 
@@ -18,4 +18,9 @@ type Author {
   id: ID
   firstName: String
   lastName: String
+}
+
+type Character {
+  id: ID
+  name: String
 }

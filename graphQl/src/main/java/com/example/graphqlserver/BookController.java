@@ -26,7 +26,6 @@ public class BookController {
         return Book.books;
     }
 
-
     @MutationMapping
     public Book addBook(@Argument String name, @Argument int pageCount, @Argument String authorId) {
         Author author = Author.getById(authorId); 

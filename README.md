@@ -1,3 +1,9 @@
+0915
+
+https://graphql.org/learn/schema/
+
+graphql docs
+
 0914
 
 next todo - add auth
