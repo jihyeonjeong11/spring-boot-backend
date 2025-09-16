@@ -12,4 +12,5 @@
     <insert id="insertUser">
         INSERT INTO users (name, email) VALUES (#{name}, #{email})
     </insert>
+
 </mapper>
