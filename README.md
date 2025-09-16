@@ -1,3 +1,11 @@
+0917
+
+Forget What I said yesterday
+
+Just stick to existing solutions!
+
+Write graphql with actual doc support!
+
 0916
 
 Find some example 2024
