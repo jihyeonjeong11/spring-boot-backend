@@ -1,3 +1,11 @@
+0916
+
+Find some example 2024
+
+https://www.youtube.com/watch?v=QV-5wqkBIpY&ab_channel=RamanpreetSingh
+https://github.com/JavatechWorld/SpringBootMyBatisCRUD
+try this one tomorrow
+
 0915
 
 https://graphql.org/learn/schema/
