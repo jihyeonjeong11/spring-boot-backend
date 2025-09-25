@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.practice.mapper.UserMapper">
-    <select id="findAllUsers" resultType="com.example.practice.model.User">
-        SELECT id, name, email FROM users
+    <select id="findByUserName" resultType="com.example.practice.model.User">
+        SELECT 
+            USER_NAME, 
+            PASSWORD, 
+            EMAIL,
+            GOOGLE_ID,
+            NAVER_ID,
+            REFRESH_TOKEN,
+            USE_YN,
+            LOGIN_FAILURE_COUNT,
+            LAST_FAILURE_TIMESTAMP
+        FROM 
+            users 
+        WHERE 
+            USER_NAME = #{userName}
     </select>
-
-    <select id="findUserById" resultType="com.example.practice.model.User">
-        SELECT id, name, email FROM users WHERE id = #{id}
-    </select>
-
-    <insert id="insertUser">
-        INSERT INTO users (name, email) VALUES (#{name}, #{email})
-    </insert>
-
 </mapper>

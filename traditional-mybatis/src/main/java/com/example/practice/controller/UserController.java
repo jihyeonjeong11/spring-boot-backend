@@ -17,18 +17,9 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userMapper.findAllUsers();
+    @GetMapping("/{userName}")
+    public User findByUserName(@PathVariable("userName") String userName) {
+        return userMapper.findByUserName(userName);
     }
 
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable("id") Long id) {
-        return userMapper.findUserById(id);
-    }
-
-    @PostMapping
-    public void addUser(@RequestBody User user) {
-        userMapper.insertUser(user);
-    }
 }
